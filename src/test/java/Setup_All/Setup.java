@@ -2,6 +2,7 @@ package Setup_All;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.ITestResult;
@@ -35,10 +36,20 @@ public class Setup {
         }
         configProperties.load(fileInput);
 
-        // Initialize WebDriver
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        //HeadLess
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--window-size=1920,1080");
+        options.addArguments("--disable-gpu");
+        driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+
+//
+//        // Initialize WebDriver
+//        driver = new ChromeDriver();
+//        driver.manage().window().maximize();
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
         // Open URL
         String baseUrl = configProperties.getProperty("url");
