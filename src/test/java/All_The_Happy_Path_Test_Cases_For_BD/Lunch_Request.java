@@ -5,12 +5,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
+
 
 import java.time.Duration;
 
@@ -35,9 +34,11 @@ public class Lunch_Request {
         PageFactory.initElements(driver, this);
     }
     public String Lunch_Request_Test()throws InterruptedException {
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         lunchManagement.click();
+        Thread.sleep(2000);
         Request_Lunch.click();
+        Thread.sleep(2000);
         select_Lunch.click();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement submitButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[contains(@class, 'submit-button')]")));
