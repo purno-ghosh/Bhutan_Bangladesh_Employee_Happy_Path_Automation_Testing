@@ -34,11 +34,11 @@ public class Lunch_Request {
         PageFactory.initElements(driver, this);
     }
     public String Lunch_Request_Test()throws InterruptedException {
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         lunchManagement.click();
         Thread.sleep(2000);
         Request_Lunch.click();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         select_Lunch.click();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement submitButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[contains(@class, 'submit-button')]")));
