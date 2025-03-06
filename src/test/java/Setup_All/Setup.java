@@ -40,12 +40,26 @@ public class Setup {
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
-        options.addArguments("--window-size=1920,1080");
         options.addArguments("--disable-gpu");
+        options.addArguments("--window-size=1920,1080"); // Optional, you can keep this for specific resolution
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
+
 //
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--headless");
+//        options.addArguments("--window-size=1920,1080");
+//        options.addArguments("--disable-gpu");
+//        driver = new ChromeDriver(options);
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+//
+//
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--window-size=1920,1080");
+//        driver = new ChromeDriver(options);
+
+////
 //        // Initialize WebDriver
 //        driver = new ChromeDriver();
 //        driver.manage().window().maximize();

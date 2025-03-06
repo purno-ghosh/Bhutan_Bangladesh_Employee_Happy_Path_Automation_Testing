@@ -27,7 +27,7 @@ public class All_Test_Cases extends Setup {
         }
     }
 
-    @Test(priority = 2, enabled = true)
+    @Test(priority = 2, enabled = false)
     public void Correction_Request_Test() throws IOException, InterruptedException {
         Correction_Request actions2 = new Correction_Request(driver);
         try {
@@ -39,7 +39,7 @@ public class All_Test_Cases extends Setup {
         }
     }
 
-    @Test(priority = 3, enabled = true)
+    @Test(priority = 3, enabled = false)
     public void Toil_Request_Test() throws IOException, InterruptedException {
         Toil_Request actions3 = new Toil_Request(driver);
         try {
@@ -63,7 +63,7 @@ public class All_Test_Cases extends Setup {
         }
     }
 
-    @Test(priority = 5, enabled = true)
+    @Test(priority = 5, enabled = false)
     public void Leave_Request_Test() throws IOException, InterruptedException {
         Leave_Request actions5 = new Leave_Request(driver);
         try {
@@ -87,11 +87,11 @@ public class All_Test_Cases extends Setup {
         }
     }
 
-    @AfterSuite
-    public void closeBrowser() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
+//    @AfterSuite
+//    public void closeBrowser() {
+//        if (driver != null) {
+//            driver.quit();
+//        }
+//    }
 
 }

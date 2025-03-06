@@ -16,6 +16,12 @@ import java.time.Duration;
 public class Lunch_Request {
     private WebDriver driver;
     private Setup setup;
+
+    @FindBy(xpath = "//form/div/h1[text()='Create Toil Request']")
+    public WebElement Create_Toil_Text;
+    @FindBy(xpath = "//span[contains(text(), 'Close')]")
+    public WebElement Create_Toil_Close;
+
     @FindBy(xpath = "//span[normalize-space(text())='Lunch System']")
     public WebElement lunchManagement;
     @FindBy(xpath = "//span[text()='Request Lunch']")
@@ -34,17 +40,37 @@ public class Lunch_Request {
         PageFactory.initElements(driver, this);
     }
     public String Lunch_Request_Test()throws InterruptedException {
-        Thread.sleep(2000);
-        lunchManagement.click();
-        Thread.sleep(2000);
-        Request_Lunch.click();
-        Thread.sleep(3000);
-        select_Lunch.click();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement submitButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[contains(@class, 'submit-button')]")));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'nearest'});", submitButton);
-        Thread.sleep(2000);
-        submit_Lunch.click();
+
+         Thread.sleep(2000);
+
+        if(Create_Toil_Text.isDisplayed()){
+            Create_Toil_Close.click();
+            System.out.println("Create Toil Request pop up shown on the lunch test case");
+            Thread.sleep(2000);
+            lunchManagement.click();
+            Thread.sleep(2000);
+            Request_Lunch.click();
+            Thread.sleep(3000);
+            select_Lunch.click();
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement submitButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[contains(@class, 'submit-button')]")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'nearest'});", submitButton);
+            Thread.sleep(2000);
+            submit_Lunch.click();
+        }else {
+            Thread.sleep(2000);
+            lunchManagement.click();
+            Thread.sleep(2000);
+            Request_Lunch.click();
+            Thread.sleep(3000);
+            select_Lunch.click();
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement submitButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[contains(@class, 'submit-button')]")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'nearest'});", submitButton);
+            Thread.sleep(2000);
+            submit_Lunch.click();
+
+        }
         return null;
     }
 

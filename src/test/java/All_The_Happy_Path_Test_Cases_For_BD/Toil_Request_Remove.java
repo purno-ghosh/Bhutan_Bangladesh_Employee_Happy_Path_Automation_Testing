@@ -24,7 +24,7 @@ public class Toil_Request_Remove {
     public WebElement toilManagement;
     @FindBy(xpath = "//span[text()='Toil Manager']")
     public WebElement toilManager;
-    @FindBy(xpath = "//span[contains(@class, 'employee-name') and normalize-space(text())='Shazneen Tabassum']")
+    @FindBy(xpath = "(//tbody//tr)[1]")
     public WebElement testBdSick;
     @FindBy(xpath = "//span[normalize-space()='Decline']")
     public WebElement declineButton;
