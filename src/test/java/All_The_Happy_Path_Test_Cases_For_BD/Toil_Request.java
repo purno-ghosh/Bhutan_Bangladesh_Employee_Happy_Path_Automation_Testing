@@ -5,6 +5,7 @@ import java.time.DayOfWeek;
 import Setup_All.Setup;
 import Setup_All.Utils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -47,6 +48,7 @@ public class Toil_Request {
         myToil.click();
         Thread.sleep(2000);
         toilRequest.click();
+        Thread.sleep(2000);
         openCalendarButton.click();
 
         LocalDate today = LocalDate.now();
@@ -65,16 +67,33 @@ public class Toil_Request {
         String targetDateStr = String.valueOf(targetDate.getDayOfMonth());
         System.out.println("Target Date: " + targetDateStr);
 
-        try{
-            driver.findElement(By.xpath("//button//div[normalize-space(text())='" + targetDateStr + "']")).click();
+        try {
+            // Wait and click the target date button
+            WebElement dateButton = driver.findElement(By.xpath("//button//div[normalize-space(text())='" + targetDateStr + "']"));
+            Utils.waitForElementToBeClickable(driver, dateButton);
+            dateButton.click();
+
+            // Enter reason
             reasonTextArea.sendKeys("Test Toil Automation");
+
+            // Wait and click request button
+            Utils.waitForElementToBeClickable(driver, requestNowButton);
             requestNowButton.click();
-            Utils.waitForElementToBeClickable(driver,requestNowButton);
-            requestNowButton.click();
+
+            // Ensure the button is still clickable before clicking again
+            Utils.waitForElementToBeClickable(driver, requestNowButton);
+            try {
+                requestNowButton.click(); // Attempt normal click
+            } catch (Exception e) {
+                // If normal click fails, use JavaScript click
+                JavascriptExecutor js = (JavascriptExecutor) driver;
+                js.executeScript("arguments[0].click();", requestNowButton);
+            }
 
         } catch (Exception e) {
             System.out.println("Already have toil");
         }
+
 
 
         return null;

@@ -85,7 +85,7 @@ public class Leave_Request {
         selectType.click();
         Thread.sleep(2000);
         annualLeave.click();
-
+        Thread.sleep(2000);
         startDate.click();
         Thread.sleep(2000);
         driver.findElement(By.xpath("//div[normalize-space(text())='" + leaveDate + "']")).click();
