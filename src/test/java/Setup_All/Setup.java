@@ -39,7 +39,7 @@ public class Setup {
 
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--window-size=1920,1080"); // Set window size
+        options.addArguments("--window-size=1520,850"); // Set window size
         options.addArguments("--disable-gpu"); // Optional: Disable GPU acceleration
         options.addArguments("--no-sandbox"); // Optional: Bypass OS security model
         options.addArguments("--disable-dev-shm-usage"); // Optional: Overcome limited resource problems
