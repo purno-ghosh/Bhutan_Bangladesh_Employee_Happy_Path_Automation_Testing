@@ -52,14 +52,15 @@ public class Toil_Request_Remove {
     public String Toil_Request_Remove_Test()throws InterruptedException {
         String password = Setup.getConfigData("password");
         String unithead=Setup.getConfigData("unithead");
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         Click_Profile.click();
+        Thread.sleep(2000);
         Click_Logout.click();
         Utils.waitForElementToBeClickable(driver,email_field);
         email_field.sendKeys(unithead);
         password_field.sendKeys(password);
         login_click.click();
-
+        Thread.sleep(4000);
 
 
         if (!driver.findElements(By.xpath("//div/h1[normalize-space(text())='My Attendance']")).isEmpty()) {
@@ -67,6 +68,7 @@ public class Toil_Request_Remove {
         } else {
             System.out.println("Unit Head not logged in, refreshing the page...");
             driver.navigate().refresh();
+            Thread.sleep(2000);
             Utils.waitForElementToBeClickable(driver, My_Attendanc_Text);
         }
 

@@ -85,11 +85,11 @@ public class All_Test_Cases extends Setup {
         }
     }
 
-    @AfterSuite
-    public void closeBrowser() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
+//    @AfterSuite
+//    public void closeBrowser() {
+//        if (driver != null) {
+//            driver.quit();
+//        }
+//    }
 
 }

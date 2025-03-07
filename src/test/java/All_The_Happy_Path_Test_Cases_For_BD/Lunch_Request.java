@@ -51,14 +51,18 @@ public class Lunch_Request {
         Thread.sleep(2000);
         Utils.waitForElementToBeClickable(driver, Request_Lunch);
         Request_Lunch.click();
+        Thread.sleep(2000);
         String xpath = "//mat-card[contains(@class, 'lunch-card')]";
         WebElement lunchCard = driver.findElement(By.xpath(xpath));
         Actions actions = new Actions(driver);
         actions.moveToElement(lunchCard).click().perform();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement submitButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[contains(@class, 'submit-button')]")));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'nearest'});", submitButton);
-        Thread.sleep(2000);
+        Thread.sleep(3000);
+
+        String submitBut = "//button[contains(@class, 'submit-button')]";
+        WebElement submitButton = driver.findElement(By.xpath(submitBut));
+        Actions actions1 = new Actions(driver);
+        actions1.moveToElement(submitButton).click().perform();
+        Thread.sleep(3000);
         submit_Lunch.click();
 
         return null;
