@@ -41,8 +41,10 @@ public class Setup {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         options.addArguments("--disable-gpu");
+        options.addArguments("--window-size=1920,1080"); // Set a specific window size
+        options.addArguments("--no-sandbox"); // Bypass OS security model
+        options.addArguments("--disable-dev-shm-usage"); // Overcome limited resource problems
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
 //        ChromeOptions options = new ChromeOptions();
 //        driver = new ChromeDriver(options);
