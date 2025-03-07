@@ -36,18 +36,8 @@ public class All_Test_Cases extends Setup {
             throw e;
         }
     }
+
     @Test(priority = 3, enabled = true)
-    public void Lunch_Request_Test() throws IOException, InterruptedException {
-        Lunch_Request actions4 = new Lunch_Request(driver);
-        try {
-            String Actual_value4 = actions4.Lunch_Request_Test();
-            Utils.writeTestResult("Test Four >> Lunch Request OK");
-        } catch (Exception e) {
-            Utils.writeTestResult("Test Four >> Lunch Request NOT OK");
-            throw e;
-        }
-    }
-    @Test(priority = 4, enabled = true)
     public void Leave_Request_Test() throws IOException, InterruptedException {
         Leave_Request actions5 = new Leave_Request(driver);
         try {
@@ -59,8 +49,7 @@ public class All_Test_Cases extends Setup {
         }
     }
 
-
-    @Test(priority = 5, enabled = true)
+    @Test(priority = 4, enabled = true)
     public void Toil_Request_Test() throws IOException, InterruptedException {
         Toil_Request actions3 = new Toil_Request(driver);
         try {
@@ -68,6 +57,18 @@ public class All_Test_Cases extends Setup {
             Utils.writeTestResult("Test Three >> Toil Request OK");
         } catch (Exception e) {
             Utils.writeTestResult("Test Three >> Toil Request NOT OK");
+            throw e;
+        }
+    }
+
+    @Test(priority = 5, enabled = true)
+    public void Lunch_Request_Test() throws IOException, InterruptedException {
+        Lunch_Request actions4 = new Lunch_Request(driver);
+        try {
+            String Actual_value4 = actions4.Lunch_Request_Test();
+            Utils.writeTestResult("Test Four >> Lunch Request OK");
+        } catch (Exception e) {
+            Utils.writeTestResult("Test Four >> Lunch Request NOT OK");
             throw e;
         }
     }
@@ -85,11 +86,11 @@ public class All_Test_Cases extends Setup {
         }
     }
 
-//    @AfterSuite
-//    public void closeBrowser() {
-//        if (driver != null) {
-//            driver.quit();
-//        }
-//    }
+    @AfterSuite
+    public void closeBrowser() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 
 }
