@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -68,22 +69,24 @@ public class Toil_Request {
         System.out.println("Target Date: " + targetDateStr);
 
         try {
-            // Wait and click the target date button
-            WebElement dateButton = driver.findElement(By.xpath("//button//div[normalize-space(text())='" + targetDateStr + "']"));
-            Utils.waitForElementToBeClickable(driver, dateButton);
-            dateButton.click();
+            // Wait and click the target date button using Actions
+            String dateButtonXpath = "//button//div[normalize-space(text())='" + targetDateStr + "']";
+            WebElement dateButton = driver.findElement(By.xpath(dateButtonXpath));
+            Actions actions = new Actions(driver);
+            actions.moveToElement(dateButton).click().perform(); // Move and click
 
             // Enter reason
             reasonTextArea.sendKeys("Test Toil Automation");
 
-            // Wait and click request button
-            Utils.waitForElementToBeClickable(driver, requestNowButton);
-            requestNowButton.click();
+            // Wait and click request button using Actions
+            String requestButtonXpath = "//button[normalize-space(text())='Request Now']";  // Update with correct button text or XPath
+            WebElement requestNowButton = driver.findElement(By.xpath(requestButtonXpath));
+            actions.moveToElement(requestNowButton).click().perform(); // Move and click
 
             // Ensure the button is still clickable before clicking again
             Utils.waitForElementToBeClickable(driver, requestNowButton);
             try {
-                requestNowButton.click(); // Attempt normal click
+                actions.moveToElement(requestNowButton).click().perform(); // Attempt normal click
             } catch (Exception e) {
                 // If normal click fails, use JavaScript click
                 JavascriptExecutor js = (JavascriptExecutor) driver;
