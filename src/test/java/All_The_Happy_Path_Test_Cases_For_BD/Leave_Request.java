@@ -85,9 +85,12 @@ public class Leave_Request {
         selectType.click();
         Thread.sleep(2000);
         annualLeave.click();
+
         startDate.click();
+        Thread.sleep(2000);
         driver.findElement(By.xpath("//div[normalize-space(text())='" + leaveDate + "']")).click();
         endDate.click();
+        Thread.sleep(2000);
         driver.findElement(By.xpath("//div[normalize-space(text())='" + leaveDate + "']")).click();
         reasonTextArea.sendKeys("Test Autoamtion Leave");
         requestNowButton.click();
@@ -107,8 +110,10 @@ public class Leave_Request {
         Thread.sleep(2000);
         sickLeave.click();
         startDate.click();
+        Thread.sleep(2000);
         driver.findElement(By.xpath("//div[normalize-space(text())='" + leaveDate + "']")).click();
         endDate.click();
+        Thread.sleep(2000);
         driver.findElement(By.xpath("//div[normalize-space(text())='" + leaveDate + "']")).click();
         reasonTextArea.sendKeys("Test Autoamtion Leave");
         requestNowButton.click();
@@ -130,6 +135,7 @@ public class Leave_Request {
         Thread.sleep(2000);
         annualLeave.click();
         startDate.click();
+        Thread.sleep(2000);
         driver.findElement(By.xpath("//div[normalize-space(text())='" + leaveDate + "']")).click();
         leaveTime.click();
         firstHalf.click();
@@ -152,6 +158,7 @@ public class Leave_Request {
         Thread.sleep(2000);
         sickLeave.click();
         startDate.click();
+        Thread.sleep(2000);
         driver.findElement(By.xpath("//div[normalize-space(text())='" + leaveDate + "']")).click();
         leaveTime.click();
         firstHalf.click();

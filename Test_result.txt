@@ -1,6 +1,3 @@
-Test One >> Clock-in OK for BD Employees
-Test Two >> Correction Request OK
-Test Five >> All Type Leave Request OK
-Test Three >> Toil Request OK
-Test Four >> Lunch Request OK
-Toil Request Remove
+Test One >> Clock-in NOT OK for BD Employees
+Test Two >> Correction Request NOT OK
+Test Five >> Leave Request NOT OK
