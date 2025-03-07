@@ -1,5 +1,7 @@
 package All_The_Happy_Path_Test_Cases_For_BD;
 import Setup_All.Setup;
+import Setup_All.Utils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,6 +40,8 @@ public class Toil_Request_Remove {
     public WebElement archiveButton;
     @FindBy(xpath = "//span[normalize-space()='Archive']")
     public WebElement archiveConfirm;
+    @FindBy(xpath = "//div/h1[normalize-space(text()='My Attendance')] ")
+    public WebElement My_Attendanc_Text;
 
 
     public Toil_Request_Remove(WebDriver driver) {
@@ -48,25 +52,39 @@ public class Toil_Request_Remove {
     public String Toil_Request_Remove_Test()throws InterruptedException {
         String password = Setup.getConfigData("password");
         String unithead=Setup.getConfigData("unithead");
+        Thread.sleep(2000);
         Click_Profile.click();
         Click_Logout.click();
-        Thread.sleep(3000);
+        Utils.waitForElementToBeClickable(driver,email_field);
         email_field.sendKeys(unithead);
         password_field.sendKeys(password);
         login_click.click();
-        Thread.sleep(5000);
-        toilManagement.click();
-        toilManager.click();
-        testBdSick.click();
-        Thread.sleep(3000);
-        declineButton.click();
-        reasonForDeclineTextArea.sendKeys("Test");
-        confirmButton.click();
-        Thread.sleep(3000);
-        firstMoreVertIcon.click();
-        archiveButton.click();
-        Thread.sleep(3000);
-        archiveConfirm.click();
+
+
+
+        if (!driver.findElements(By.xpath("//div/h1[normalize-space(text())='My Attendance']")).isEmpty()) {
+            System.out.println("Unit Head login");
+        } else {
+            System.out.println("Unit Head not logged in, refreshing the page...");
+            driver.navigate().refresh();
+            Utils.waitForElementToBeClickable(driver, My_Attendanc_Text);
+        }
+
+            toilManagement.click();
+            toilManager.click();
+            Thread.sleep(2000);
+            testBdSick.click();
+            Thread.sleep(3000);
+            declineButton.click();
+            reasonForDeclineTextArea.sendKeys("Test");
+            confirmButton.click();
+            Thread.sleep(3000);
+            firstMoreVertIcon.click();
+            Thread.sleep(2000);
+            archiveButton.click();
+            Thread.sleep(3000);
+            archiveConfirm.click();
+
         return null;
     }
 

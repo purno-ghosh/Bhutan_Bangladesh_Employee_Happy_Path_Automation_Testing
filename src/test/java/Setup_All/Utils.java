@@ -4,12 +4,16 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -70,5 +74,16 @@ public class Utils {
             System.err.println("An error occurred while clearing the file: " + e.getMessage());
         }
     }
+
+    private static final int DEFAULT_WAIT_TIME = 10;
+    public static void waitForElementToBeClickable(WebDriver driver, WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_WAIT_TIME));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+    public static void waitForElementToBeClickable(WebDriver driver, WebElement element, int timeInSeconds) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeInSeconds));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
 
 }

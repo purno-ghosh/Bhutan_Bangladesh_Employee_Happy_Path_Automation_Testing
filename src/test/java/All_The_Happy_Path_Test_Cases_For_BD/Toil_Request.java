@@ -1,12 +1,16 @@
 package All_The_Happy_Path_Test_Cases_For_BD;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.DayOfWeek;
 import Setup_All.Setup;
+import Setup_All.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Toil_Request {
     private WebDriver driver;
@@ -46,26 +50,32 @@ public class Toil_Request {
         openCalendarButton.click();
 
         LocalDate today = LocalDate.now();
-        LocalDate nextSaturday = today.with(DayOfWeek.SATURDAY);
-        String saturdayDate;
+        LocalDate targetDate;
 
-        if (today.getDayOfWeek() == DayOfWeek.SATURDAY) {
-            saturdayDate = String.valueOf(today.getDayOfMonth());
+        if (today.getDayOfWeek() == DayOfWeek.FRIDAY || today.getDayOfWeek() == DayOfWeek.SATURDAY) {
+            targetDate = today;
         } else {
-            nextSaturday = nextSaturday.plusWeeks(1);
-            saturdayDate = String.valueOf(nextSaturday.getDayOfMonth());
-            if (nextSaturday.getMonth() != today.getMonth()) {
-                saturdayDate = String.valueOf(nextSaturday.getDayOfMonth());
-                nextMonthButton.click();
+
+            targetDate = today.with(DayOfWeek.FRIDAY);
+            if (targetDate.isBefore(today)) {
+                targetDate = targetDate.plusWeeks(1);
             }
         }
 
-        System.out.println("Upcoming Saturday Date: " + saturdayDate);
-        Thread.sleep(3000);
-        driver.findElement(By.xpath("//button//div[normalize-space(text())='" + saturdayDate + "']")).click();
-        reasonTextArea.sendKeys("Test Toil Automation");
-        Thread.sleep(3000);
-        requestNowButton.click();
+        String targetDateStr = String.valueOf(targetDate.getDayOfMonth());
+        System.out.println("Target Date: " + targetDateStr);
+
+        try{
+            driver.findElement(By.xpath("//button//div[normalize-space(text())='" + targetDateStr + "']")).click();
+            reasonTextArea.sendKeys("Test Toil Automation");
+            requestNowButton.click();
+            Utils.waitForElementToBeClickable(driver,requestNowButton);
+            requestNowButton.click();
+
+        } catch (Exception e) {
+            System.out.println("Already have toil");
+        }
+
 
         return null;
     }

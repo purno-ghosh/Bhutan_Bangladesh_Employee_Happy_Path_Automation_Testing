@@ -1,12 +1,10 @@
 package Test_Runner;
-
 import All_The_Happy_Path_Test_Cases_For_BD.*;
 import Setup_All.Setup;
 import Setup_All.Utils;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-
 import java.io.IOException;
 
 public class All_Test_Cases extends Setup {
@@ -27,7 +25,7 @@ public class All_Test_Cases extends Setup {
         }
     }
 
-    @Test(priority = 2, enabled = false)
+    @Test(priority = 2, enabled = true)
     public void Correction_Request_Test() throws IOException, InterruptedException {
         Correction_Request actions2 = new Correction_Request(driver);
         try {
@@ -38,8 +36,31 @@ public class All_Test_Cases extends Setup {
             throw e;
         }
     }
+    @Test(priority = 3, enabled = true)
+    public void Lunch_Request_Test() throws IOException, InterruptedException {
+        Lunch_Request actions4 = new Lunch_Request(driver);
+        try {
+            String Actual_value4 = actions4.Lunch_Request_Test();
+            Utils.writeTestResult("Test Four >> Lunch Request OK");
+        } catch (Exception e) {
+            Utils.writeTestResult("Test Four >> Lunch Request NOT OK");
+            throw e;
+        }
+    }
+    @Test(priority = 4, enabled = true)
+    public void Leave_Request_Test() throws IOException, InterruptedException {
+        Leave_Request actions5 = new Leave_Request(driver);
+        try {
+            actions5.applyAndWithdrawLeave();
+            Utils.writeTestResult("Test Five >> All Type Leave Request OK");
+        } catch (Exception e) {
+            Utils.writeTestResult("Test Five >> Leave Request NOT OK");
+            throw e;
+        }
+    }
 
-    @Test(priority = 3, enabled = false)
+
+    @Test(priority = 5, enabled = true)
     public void Toil_Request_Test() throws IOException, InterruptedException {
         Toil_Request actions3 = new Toil_Request(driver);
         try {
@@ -51,29 +72,6 @@ public class All_Test_Cases extends Setup {
         }
     }
 
-    @Test(priority = 4, enabled = true)
-    public void Lunch_Request_Test() throws IOException, InterruptedException {
-        Lunch_Request actions4 = new Lunch_Request(driver);
-        try {
-            String Actual_value4 = actions4.Lunch_Request_Test();
-            Utils.writeTestResult("Test Four >> Lunch Request OK");
-        } catch (Exception e) {
-            Utils.writeTestResult("Test Four >> Lunch Request NOT OK");
-            throw e;
-        }
-    }
-
-    @Test(priority = 5, enabled = false)
-    public void Leave_Request_Test() throws IOException, InterruptedException {
-        Leave_Request actions5 = new Leave_Request(driver);
-        try {
-            actions5.applyAndWithdrawLeave();
-            Utils.writeTestResult("Test Five >> All Type Leave Request OK");
-        } catch (Exception e) {
-            Utils.writeTestResult("Test Five >> Leave Request NOT OK");
-            throw e;
-        }
-    }
 
     @Test(priority = 6, enabled = true)
     public void Toil_Request_Remove_Test() throws IOException, InterruptedException {
@@ -87,11 +85,11 @@ public class All_Test_Cases extends Setup {
         }
     }
 
-//    @AfterSuite
-//    public void closeBrowser() {
-//        if (driver != null) {
-//            driver.quit();
-//        }
-//    }
+    @AfterSuite
+    public void closeBrowser() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 
 }

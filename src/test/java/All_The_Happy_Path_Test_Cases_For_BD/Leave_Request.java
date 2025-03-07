@@ -62,16 +62,20 @@ public class Leave_Request {
     public void applyAndWithdrawLeave() throws InterruptedException {
         Thread.sleep(2000);
         LocalDate today = LocalDate.now();
-        int leaveDate = (today.getDayOfWeek() == DayOfWeek.FRIDAY || today.getDayOfWeek() == DayOfWeek.SATURDAY)
-                ? today.with(DayOfWeek.SUNDAY).plusWeeks(1).getDayOfMonth()
-                : today.getDayOfMonth();
+        int leaveDate;
 
+        if (today.getDayOfWeek() == DayOfWeek.FRIDAY || today.getDayOfWeek() == DayOfWeek.SATURDAY) {
+            leaveDate = today.with(DayOfWeek.MONDAY).plusWeeks(1).getDayOfMonth();
+        } else {
+            leaveDate = today.getDayOfMonth();
+        }
         if (today.getDayOfMonth() == 30 && leaveDate < today.getDayOfMonth()) {
             nextButton.click();
             System.out.println("Clicked next button to go to the next month");
         }
 
         System.out.println("Working date leave date" + leaveDate);
+        Thread.sleep(2000);
         leaveManagement.click();
         myLeave.click();
 
