@@ -62,8 +62,6 @@ public class Lunch_Request {
         WebElement submitButton = driver.findElement(By.xpath(submitBut));
         Actions actions1 = new Actions(driver);
         actions1.moveToElement(submitButton).click().perform();
-        Thread.sleep(3000);
-        submit_Lunch.click();
 
         return null;
     }
