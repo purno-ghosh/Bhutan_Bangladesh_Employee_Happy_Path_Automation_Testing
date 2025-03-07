@@ -28,6 +28,11 @@ public class Utils {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+    private static final int DEFAULT_WAIT_TIME = 10;
+    public static void waitForElementToBeVisible(WebDriver driver, WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_WAIT_TIME));
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
 
     public void takeScreenShot(String status) throws IOException {
         File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
@@ -76,9 +81,9 @@ public class Utils {
         }
     }
 
-    private static final int DEFAULT_WAIT_TIME = 10;
+    private static final int DEFAULT_WAIT_TIMEs = 10;
     public static void waitForElementToBeClickable(WebDriver driver, WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_WAIT_TIME));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_WAIT_TIMEs));
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
     public static void waitForElementToBeClickable(WebDriver driver, WebElement element, int timeInSeconds) {
