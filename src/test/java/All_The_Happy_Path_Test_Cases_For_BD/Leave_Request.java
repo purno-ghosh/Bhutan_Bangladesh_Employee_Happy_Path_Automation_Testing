@@ -61,99 +61,118 @@ public class Leave_Request {
     }
 
     public void applyAndWithdrawLeave() throws InterruptedException {
-        Actions actions = new Actions(driver);
-
-        // Wait and click on Leave Management
-        Utils.waitForElementToBeClickable(driver, leaveManagement);
-        actions.moveToElement(leaveManagement).click().perform();
-
-        // Wait and click on My Leave
-        Utils.waitForElementToBeClickable(driver, myLeave);
-        actions.moveToElement(myLeave).click().perform();
-
-        // Determine the next working day
+        Thread.sleep(2000);
         LocalDate today = LocalDate.now();
         int leaveDate;
-
+        Actions actions = new Actions(driver);
         if (today.getDayOfWeek() == DayOfWeek.FRIDAY || today.getDayOfWeek() == DayOfWeek.SATURDAY) {
             leaveDate = today.with(DayOfWeek.MONDAY).plusWeeks(1).getDayOfMonth();
         } else {
             leaveDate = today.getDayOfMonth();
         }
-
         if (today.getDayOfMonth() == 30 && leaveDate < today.getDayOfMonth()) {
-            // Wait and click next month button
-            Utils.waitForElementToBeClickable(driver, nextButton);
             actions.moveToElement(nextButton).click().perform();
             System.out.println("Clicked next button to go to the next month");
         }
 
-        System.out.println("Working date leave date: " + leaveDate);
+        System.out.println("Working date leave date" + leaveDate);
+        Thread.sleep(2000);
+        actions.moveToElement(leaveManagement).click().perform();
+        actions.moveToElement(myLeave).click().perform();
 
-        // Apply and withdraw different types of leave
-        applyLeave(annualLeave, leaveDate, false, false, actions);
-        applyLeave(sickLeave, leaveDate, false, true, actions);
-        applyLeave(annualLeave, leaveDate, true, false, actions);
-        applyLeave(sickLeave, leaveDate, true, true, actions);
-    }
-
-    private void applyLeave(WebElement leaveType, int leaveDate, boolean isHalfDay, boolean isSickLeave, Actions actions) throws InterruptedException {
-        // Wait and click on Leave Request
-        Utils.waitForElementToBeClickable(driver, leaveRequest);
+        //  ----  Annual Leave ----- //
         actions.moveToElement(leaveRequest).click().perform();
-
-        if (isHalfDay) {
-            // Wait and click Half Day option
-            Utils.waitForElementToBeClickable(driver, halfDay);
-            actions.moveToElement(halfDay).click().perform();
-        }
-
-        // Wait and click Select Type
-        Utils.waitForElementToBeClickable(driver, selectType);
+        Thread.sleep(2000);
         actions.moveToElement(selectType).click().perform();
-
-        // Wait and click the specific leave type
-        Utils.waitForElementToBeClickable(driver, leaveType);
-        actions.moveToElement(leaveType).click().perform();
-
-        // Select start date
-        Utils.waitForElementToBeClickable(driver, startDate);
+        Thread.sleep(2000);
+        actions.moveToElement(annualLeave).click().perform();
+        Thread.sleep(2000);
         actions.moveToElement(startDate).click().perform();
-        WebElement startDateElement = driver.findElement(By.xpath("//div[normalize-space(text())='" + leaveDate + "']"));
-        Utils.waitForElementToBeClickable(driver, startDateElement);
-        actions.moveToElement(startDateElement).click().perform();
-
-        // Select end date (if not a half-day leave)
-        if (!isHalfDay) {
-            Utils.waitForElementToBeClickable(driver, endDate);
-            actions.moveToElement(endDate).click().perform();
-            WebElement endDateElement = driver.findElement(By.xpath("//div[normalize-space(text())='" + leaveDate + "']"));
-            Utils.waitForElementToBeClickable(driver, endDateElement);
-            actions.moveToElement(endDateElement).click().perform();
-        } else {
-            // Select leave time for half-day leave
-            Utils.waitForElementToBeClickable(driver, leaveTime);
-            actions.moveToElement(leaveTime).click().perform();
-            Utils.waitForElementToBeClickable(driver, firstHalf);
-            actions.moveToElement(firstHalf).click().perform();
-        }
-
-        // Enter reason
-        Utils.waitForElementToBeVisible(driver, reasonTextArea);
-        reasonTextArea.sendKeys("Test Automation Leave");
-
-        // Submit leave request
-        Utils.waitForElementToBeClickable(driver, requestNowButton);
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//div[normalize-space(text())='" + leaveDate + "']")).click();
+        actions.moveToElement(endDate).click().perform();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//div[normalize-space(text())='" + leaveDate + "']")).click();
+        reasonTextArea.sendKeys("Test Autoamtion Leave");
         actions.moveToElement(requestNowButton).click().perform();
-
-        // Withdraw Leave
-        Utils.waitForElementToBeClickable(driver, firstRow);
+        Thread.sleep(3000);
         actions.moveToElement(firstRow).click().perform();
-        Utils.waitForElementToBeClickable(driver, withdrawButton);
         actions.moveToElement(withdrawButton).click().perform();
-        Utils.waitForElementToBeClickable(driver, confirmWithdraw);
+        Thread.sleep(2000);
         actions.moveToElement(confirmWithdraw).click().perform();
+        Thread.sleep(2000);
+        System.out.println("Annual Leave successfully!");
 
-        System.out.println((isSickLeave ? "Sick" : "Annual") + (isHalfDay ? " Half-Day" : "") + " Leave successfully applied and withdrawn!");
+        //  ----  Sick Leave ----- //
+
+        actions.moveToElement(leaveRequest).click().perform();
+        Thread.sleep(2000);
+        actions.moveToElement(selectType).click().perform();
+        Thread.sleep(2000);
+        actions.moveToElement(sickLeave).click().perform();
+        actions.moveToElement(startDate).click().perform();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//div[normalize-space(text())='" + leaveDate + "']")).click();
+        actions.moveToElement(endDate).click().perform();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//div[normalize-space(text())='" + leaveDate + "']")).click();
+        reasonTextArea.sendKeys("Test Autoamtion Leave");
+        actions.moveToElement(requestNowButton).click().perform();
+        Thread.sleep(3000);
+        actions.moveToElement(firstRow).click().perform();
+        actions.moveToElement(withdrawButton).click().perform();
+        Thread.sleep(2000);
+        actions.moveToElement(confirmWithdraw).click().perform();
+        Thread.sleep(2000);
+        System.out.println("Sick Leave successfully!");
+
+        //  ----  Annual Half Day Leave ----- //
+
+        actions.moveToElement(leaveRequest).click().perform();
+        Thread.sleep(2000);
+        actions.moveToElement(halfDay).click().perform();
+        Thread.sleep(1000);
+        actions.moveToElement(selectType).click().perform();
+        Thread.sleep(2000);
+        actions.moveToElement(annualLeave).click().perform();
+        actions.moveToElement(startDate).click().perform();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//div[normalize-space(text())='" + leaveDate + "']")).click();
+        actions.moveToElement(leaveTime).click().perform();
+        actions.moveToElement(firstHalf).click().perform();
+        reasonTextArea.sendKeys("Test Autoamtion Leave");
+        actions.moveToElement(requestNowButton).click().perform();
+        Thread.sleep(3000);
+        actions.moveToElement(firstRow).click().perform();
+        actions.moveToElement(withdrawButton).click().perform();
+        Thread.sleep(2000);
+        actions.moveToElement(confirmWithdraw).click().perform();
+        Thread.sleep(2000);
+        System.out.println("Annual Half Day Leave successfully!");
+
+        //  ----  Sick Half Day Leave ----- //
+        actions.moveToElement(leaveRequest).click().perform();
+        Thread.sleep(2000);
+        actions.moveToElement(halfDay).click().perform();
+        Thread.sleep(1000);
+        actions.moveToElement(selectType).click().perform();
+        Thread.sleep(2000);
+        actions.moveToElement(sickLeave).click().perform();
+        actions.moveToElement(startDate).click().perform();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//div[normalize-space(text())='" + leaveDate + "']")).click();
+        actions.moveToElement(leaveTime).click().perform();
+        actions.moveToElement(firstHalf).click().perform();
+        reasonTextArea.sendKeys("Test Autoamtion Leave");
+        Thread.sleep(3000);
+        actions.moveToElement(requestNowButton).click().perform();
+        Thread.sleep(3000);
+        actions.moveToElement(firstRow).click().perform();
+        actions.moveToElement(withdrawButton).click().perform();
+        Thread.sleep(2000);
+        actions.moveToElement(confirmWithdraw).click().perform();
+        Thread.sleep(2000);
+        System.out.println("Annual Half Day Leave successfully!");
     }
+
 }
