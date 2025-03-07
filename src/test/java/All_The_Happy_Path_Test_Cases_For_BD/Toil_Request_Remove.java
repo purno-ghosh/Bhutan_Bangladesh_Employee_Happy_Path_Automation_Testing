@@ -50,6 +50,7 @@ public class Toil_Request_Remove {
         PageFactory.initElements(driver, this);
     }
     public String Toil_Request_Remove_Test()throws InterruptedException {
+       driver.navigate().refresh();
         String password = Setup.getConfigData("password");
         String unithead=Setup.getConfigData("unithead");
         Thread.sleep(3000);

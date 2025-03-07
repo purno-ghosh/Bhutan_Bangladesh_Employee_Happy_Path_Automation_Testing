@@ -46,7 +46,8 @@ public class Lunch_Request {
 
     public String Lunch_Request_Test() throws InterruptedException {
 
-        Utils.waitForElementToBeClickable(driver, lunchManagement);
+        driver.navigate().refresh();
+        Utils.waitForElementToBeClickable(driver, lunchManagement,15);
         lunchManagement.click();
         Thread.sleep(2000);
         Utils.waitForElementToBeClickable(driver, Request_Lunch);
