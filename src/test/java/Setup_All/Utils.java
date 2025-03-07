@@ -29,16 +29,28 @@ public class Utils {
         PageFactory.initElements(driver, this);
     }
 
-    public void takeScreenShot(String status) throws IOException {
-        File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        String time = new SimpleDateFormat("dd-MM-yyyy-hh-mm").format(new Date());
-        String fileWithPath = "src/test/resources/screenshots/" + status + "-" + time + ".png";
-        File destFile = new File(fileWithPath);
-        if (destFile.exists()) {
-            destFile.delete();
+    public void takeScreenShot(String status) {
+        try {
+            File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            String time = new SimpleDateFormat("dd-MM-yyyy-hh-mm").format(new Date());
+            String fileWithPath = "src/test/resources/screenshots/" + status + "-" + time + ".png";
+            File destFile = new File(fileWithPath);
+
+            if (!destFile.getParentFile().exists()) {
+                destFile.getParentFile().mkdirs(); // Create the directory if it doesn't exist
+            }
+
+            FileUtils.copyFile(screenshotFile, destFile);
+            System.out.println("Screenshot saved at: " + fileWithPath);
+        } catch (IOException e) {
+            System.err.println("Failed to take screenshot: " + e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("Unexpected error: " + e.getMessage());
+            e.printStackTrace();
         }
-        FileUtils.copyFile(screenshotFile, destFile);
     }
+
 
     public static String getPcDate() {
         LocalDate today = LocalDate.now();

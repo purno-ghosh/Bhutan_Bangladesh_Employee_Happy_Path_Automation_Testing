@@ -50,18 +50,6 @@ public class Setup {
 //        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
 
-//
-//
-//        ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--window-size=1920,1080");
-//        driver = new ChromeDriver(options);
-
-////
-//        // Initialize WebDriver
-//        driver = new ChromeDriver();
-//        driver.manage().window().maximize();
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-
         // Open URL
         String baseUrl = configProperties.getProperty("url");
         driver.get(baseUrl);
