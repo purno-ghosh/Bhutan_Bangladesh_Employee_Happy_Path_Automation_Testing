@@ -52,9 +52,20 @@ public class Setup {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
 
+
+
         // Open URL
         String baseUrl = configProperties.getProperty("url");
         driver.get(baseUrl);
+    }
+    @AfterMethod
+    public void takeScreenshot(ITestResult result) throws IOException {
+        Utils utils = new Utils(driver);  // Initialize your custom Utils class for taking screenshots
+        if (ITestResult.FAILURE == result.getStatus()) {
+            utils.takeScreenShot("failure");
+        } else if (ITestResult.SUCCESS == result.getStatus()) {
+            utils.takeScreenShot("success");
+        }
     }
 
     public static String getConfigData(String propertyName) {
