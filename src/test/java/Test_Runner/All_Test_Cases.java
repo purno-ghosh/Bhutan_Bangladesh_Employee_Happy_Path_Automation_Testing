@@ -8,10 +8,10 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 public class All_Test_Cases extends Setup {
-    @BeforeSuite
-    public void clearTestResultFile() {
-        Utils.clearTestResultFile();
-    }
+//    @BeforeSuite
+//    public void clearTestResultFile() {
+//        Utils.clearTestResultFile();
+//    }
 
     @Test(priority = 1, enabled = true)
     public void Bangladeshi_Employees_Attendance() throws IOException, InterruptedException {
@@ -86,11 +86,11 @@ public class All_Test_Cases extends Setup {
         }
     }
 
-    @AfterSuite
-    public void closeBrowser() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
+//    @AfterSuite
+//    public void closeBrowser() {
+//        if (driver != null) {
+//            driver.quit();
+//        }
+//    }
 
 }

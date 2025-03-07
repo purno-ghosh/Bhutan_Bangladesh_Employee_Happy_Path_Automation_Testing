@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.ITestResult;
 
 import java.io.FileWriter;
@@ -18,15 +18,9 @@ public class Setup {
     public static WebDriver driver;
     public static Properties configProperties;
 
-    @BeforeClass
+    @BeforeSuite
     public void setup() throws IOException {
-        // Clear result file
-        try (FileWriter writer = new FileWriter("Test_result.txt", false)) { // Overwrites existing content
-            writer.write("");
-            System.out.println("Cleared Test_result.txt before test execution.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        clearTestResultFile(); // Call method to clear test results
 
         // Load properties
         configProperties = new Properties();
@@ -36,21 +30,29 @@ public class Setup {
         }
         configProperties.load(fileInput);
 
-
-
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--window-size=1520,850"); // Set window size
-        options.addArguments("--disable-gpu"); // Optional: Disable GPU acceleration
-        options.addArguments("--no-sandbox"); // Optional: Bypass OS security model
-        options.addArguments("--disable-dev-shm-usage"); // Optional: Overcome limited resource problems
+        options.addArguments("--headless");
+        options.addArguments("--window-size=1920,1080");
+        options.addArguments("--disable-gpu");
         driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
         String baseUrl = configProperties.getProperty("url");
         driver.get(baseUrl);
     }
+
+    public void clearTestResultFile() {
+        try (FileWriter writer = new FileWriter("Test_result.txt", false)) {
+            writer.write("");
+            System.out.println("Cleared Test_result.txt before test execution.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @AfterMethod
     public void takeScreenshot(ITestResult result) throws IOException {
-        Utils utils = new Utils(driver);  // Initialize your custom Utils class for taking screenshots
+        Utils utils = new Utils(driver);
         if (ITestResult.FAILURE == result.getStatus()) {
             utils.takeScreenShot("failure");
         } else if (ITestResult.SUCCESS == result.getStatus()) {
