@@ -163,6 +163,7 @@ public class Leave_Request {
         leaveTime.click();
         firstHalf.click();
         reasonTextArea.sendKeys("Test Autoamtion Leave");
+        Thread.sleep(3000);
         requestNowButton.click();
         Thread.sleep(3000);
         firstRow.click();

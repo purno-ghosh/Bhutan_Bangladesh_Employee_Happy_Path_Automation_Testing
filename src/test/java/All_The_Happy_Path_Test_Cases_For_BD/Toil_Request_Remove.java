@@ -80,6 +80,7 @@ public class Toil_Request_Remove {
             Thread.sleep(3000);
             declineButton.click();
             Thread.sleep(3000);
+            reasonForDeclineTextArea.click();
             reasonForDeclineTextArea.sendKeys("Test");
             Thread.sleep(2000);
             confirmButton.click();
