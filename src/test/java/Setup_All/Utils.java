@@ -28,7 +28,9 @@ public class Utils {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+
     private static final int DEFAULT_WAIT_TIME = 10;
+
     public static void waitForElementToBeVisible(WebDriver driver, WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_WAIT_TIME));
         wait.until(ExpectedConditions.visibilityOf(element));
@@ -70,22 +72,14 @@ public class Utils {
         }
     }
 
-    // Method to clear the file content before running tests
-    public static void clearTestResultFile() {
-        String filePath = "test_result.txt";
-        try (FileWriter writer = new FileWriter(filePath, false)) { // Overwrite mode
-            writer.write(""); // Clear the file content
-            System.out.println("Test result file cleared.");
-        } catch (IOException e) {
-            System.err.println("An error occurred while clearing the file: " + e.getMessage());
-        }
-    }
 
     private static final int DEFAULT_WAIT_TIMEs = 10;
+
     public static void waitForElementToBeClickable(WebDriver driver, WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_WAIT_TIMEs));
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
+
     public static void waitForElementToBeClickable(WebDriver driver, WebElement element, int timeInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeInSeconds));
         wait.until(ExpectedConditions.elementToBeClickable(element));
@@ -93,3 +87,20 @@ public class Utils {
 
 
 }
+
+
+
+
+
+
+
+//    // Method to clear the file content before running tests
+//    public static void clearTestResultFile() {
+//        String filePath = "test_result.txt";
+//        try (FileWriter writer = new FileWriter(filePath, false)) { // Overwrite mode
+//            writer.write(""); // Clear the file content
+//            System.out.println("Test result file cleared.");
+//        } catch (IOException e) {
+//            System.err.println("An error occurred while clearing the file: " + e.getMessage());
+//        }
+//    }

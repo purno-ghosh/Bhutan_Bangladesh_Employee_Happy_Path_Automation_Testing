@@ -81,9 +81,9 @@ public class Leave_Request {
         actions.moveToElement(myLeave).click().perform();
 
         //  ----  Annual Leave ----- //
-        actions.moveToElement(leaveRequest).click().perform();
-        Thread.sleep(2000);
-        actions.moveToElement(selectType).click().perform();
+        leaveRequest.click();
+        Thread.sleep(4000);
+        selectType.click();
         Thread.sleep(2000);
         actions.moveToElement(annualLeave).click().perform();
         Thread.sleep(2000);
@@ -164,15 +164,16 @@ public class Leave_Request {
         actions.moveToElement(leaveTime).click().perform();
         actions.moveToElement(firstHalf).click().perform();
         reasonTextArea.sendKeys("Test Autoamtion Leave");
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         actions.moveToElement(requestNowButton).click().perform();
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         actions.moveToElement(firstRow).click().perform();
         actions.moveToElement(withdrawButton).click().perform();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         actions.moveToElement(confirmWithdraw).click().perform();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         System.out.println("Annual Half Day Leave successfully!");
-    }
+        Thread.sleep(5000);
+ }
 
 }

@@ -39,6 +39,7 @@ public class Correction_Request {
        correction_start_time.sendKeys("10:00:00");
        correction_end_time.sendKeys("20:00:00");
        correction_Request_now_button.click();
+       Thread.sleep(5000);
        return null;
    }
 
