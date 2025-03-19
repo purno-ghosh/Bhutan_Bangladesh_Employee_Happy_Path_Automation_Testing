@@ -79,20 +79,20 @@ public class Setup {
             System.out.println("Test failed, screenshot captured.");
         }
 
-//        // Close the browser after each test case
-//        if (driver != null) {
-//            driver.quit();
-//            System.out.println("Browser closed successfully after test: " + result.getName());
-//        }
-    }
+       // Close the browser after each test case
+       if (driver != null) {
+           driver.quit();
+           System.out.println("Browser closed successfully after test: " + result.getName());
+       }
+ }
 
-//    @AfterClass
-//    public void tearDown() {
-//        if (driver != null) {
-//            driver.quit();
-//            driver = null;
-//        }
-//    }
+   @AfterClass
+   public void tearDown() {
+       if (driver != null) {
+           driver.quit();
+           driver = null;
+       }
+   }
 
 
     public static String getConfigData(String propertyName) {

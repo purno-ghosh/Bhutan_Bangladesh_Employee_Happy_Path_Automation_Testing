@@ -34,7 +34,10 @@ public class Bangladeshi_Employee_Clock_IN {
 
         String pcDate = Utils.getPcDate();
         String pcTime = Utils.getPcTime();
+        Thread.sleep(3000);
         String Webdate = wedDate.getText();
+        System.out.println(Webdate);
+        System.out.println(pcDate);
 
         if (Webdate.equals(pcDate)) {
             System.out.println("Test 01 >> Pc local date and web local is matching");
