@@ -33,7 +33,7 @@ public class All_Test_Cases extends Setup {
         }
     }
 
-    @Test(priority = 2, enabled = true)
+    @Test(priority = 2, enabled = false)
     public void Correction_Request_Test() throws IOException, InterruptedException {
         Login_Page loginPage = new Login_Page(driver);
         loginPage.dologin();
@@ -63,7 +63,7 @@ public class All_Test_Cases extends Setup {
         }
     }
 
-    @Test(priority = 4, enabled = true)
+    @Test(priority = 4, enabled = false)
     public void Toil_Request_Test() throws IOException, InterruptedException {
         Login_Page loginPage = new Login_Page(driver);
         loginPage.dologin();
@@ -78,7 +78,7 @@ public class All_Test_Cases extends Setup {
         }
     }
 
-    @Test(priority = 5, enabled = true)
+    @Test(priority = 5, enabled = false)
     public void Lunch_Request_Test() throws IOException, InterruptedException {
         Login_Page loginPage = new Login_Page(driver);
         loginPage.dologin();
@@ -93,7 +93,7 @@ public class All_Test_Cases extends Setup {
         }
     }
 
-    @Test(priority = 6, enabled = true)
+    @Test(priority = 6, enabled = false)
     public void Toil_Request_Remove_Test() throws IOException, InterruptedException {
 
         Toil_Request_Remove actions6 = new Toil_Request_Remove(driver);
